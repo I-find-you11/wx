@@ -27,7 +27,7 @@
         signature = json.signature;
         wx.config({
             beta: true,
-            debug: false,
+            debug: true,
             appId: 'wx154751b777d1dd84',
             timestamp: timestamp,
             nonceStr: noncestr,
@@ -35,13 +35,12 @@
             jsApiList: ['configWXDeviceWiFi']
         });
         wx.ready(function () {
-            console.log(111);
             wx.checkJsApi({
                 jsApiList: ['configWXDeviceWiFi'],
                 success: function(res) {
                     wx.invoke('configWXDeviceWiFi', {}, function(res){
+                        alert(111);
                         err_msg = res.err_msg
-                        console.log(res);
                         if(err_msg == 'configWXDeviceWiFi:ok') {
                             //$('#tips').html("配置 wifi 成功，正在跳转...");
                             //window.location = 'https://iot.espressif.cn/m/#/' + window.location.search;
@@ -49,7 +48,7 @@
                         } else {
                             //$('#tips').html("配置 wifi 失败，是否再次<a href=\"https://iot.espressif.cn/configWXDeviceWiFi.html" + window.location.search +  "\">扫描</a>");
                         }
-                        console.log('configWXDeviceWiFi', res);
+                        //console.log('configWXDeviceWiFi', res);
                     });
                 }
             });
