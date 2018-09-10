@@ -27,21 +27,20 @@
         signature = json.signature;
         wx.config({
             beta: true,
-            debug: true,
+            debug: false,
             appId: 'wx154751b777d1dd84',
             timestamp: timestamp,
             nonceStr: noncestr,
             signature: signature,
             jsApiList: ['configWXDeviceWiFi']
         });
-        alert(3333);
         wx.ready(function () {
             wx.checkJsApi({
                 jsApiList: ['configWXDeviceWiFi'],
                 success: function(res) {
                     wx.invoke('configWXDeviceWiFi', {}, function(res){
                         err_msg = res.err_msg
-                        alert(err_msg);
+                        alert(res);
                         if(err_msg == 'configWXDeviceWiFi:ok') {
                             $('#tips').html("配置 wifi 成功，正在跳转...");
                             //window.location = 'https://iot.espressif.cn/m/#/' + window.location.search;
