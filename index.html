@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no"  />
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name='apple-touch-fullscreen' content='yes'>
+    <meta name="full-screen" content="yes">
+    <title>configWXDeviceWiFi...</title>
+  </head>
+  <body>
+    <p id="tips">开始扫描 WiFi...</p>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+    <script src="http://iot.espressif.cn/static/js/jquery.min.js"></script>
+    <script>
+    (function(){   
+        json = {
+            timestamp:1536563204,
+            noncestr:'4f3cf3804e043965',
+            jsApiList:'b74fa72e361befe8ebc8b5929c6ef45eb23656b9'
+        }
+        timestamp = json.timestamp;
+        noncestr = json.noncestr;
+        signature = json.signature;
+        wx.config({
+            beta: true,
+            debug: false,
+            appId: 'wx154751b777d1dd84',
+            timestamp: timestamp,
+            nonceStr: noncestr,
+            signature: signature,
+            jsApiList: ['configWXDeviceWiFi']
+        });
+        wx.ready(function () {
+        console.log(111);
+            wx.checkJsApi({
+                jsApiList: ['configWXDeviceWiFi'],
+                success: function(res) {
+                    wx.invoke('configWXDeviceWiFi', {}, function(res){
+                        err_msg = res.err_msg
+                        console.log(res);
+                        if(err_msg == 'configWXDeviceWiFi:ok') {
+                            //$('#tips').html("配置 wifi 成功，正在跳转...");
+                            //window.location = 'https://iot.espressif.cn/m/#/' + window.location.search;
+                            return;
+                        } else {
+                            //$('#tips').html("配置 wifi 失败，是否再次<a href=\"https://iot.espressif.cn/configWXDeviceWiFi.html" + window.location.search +  "\">扫描</a>");
+                        }
+                        console.log('configWXDeviceWiFi', res);
+                    });
+                }
+            });
+        });
+    }())    
+    </script>
+  </body>
+</html>
